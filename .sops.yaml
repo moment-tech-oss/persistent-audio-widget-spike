@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: k8s/.*\.yaml
+    encrypted_regex: '^(data|stringData|nginx\.ingress\.kubernetes\.io/whitelist-source-range)$'
+    age: "age1zexdd6jgd7j4nh4dzn4umtu0ejpunghyhq9fxqvlt0u0sfeclpgq2d7m2l"
