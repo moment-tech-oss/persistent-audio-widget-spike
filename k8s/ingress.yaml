@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: persistent-audio-widget-spike
+    namespace: moment-tech-oss
+    annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        nginx.ingress.kubernetes.io/whitelist-source-range: ENC[AES256_GCM,data:pX+KPv6DuFFhI8571OPZntAu/jn0POpIDCinhiWh/OD90GmKjz+QdEYKKERX7BGAoyzyC/qYfqTPV1mYXrH3HFj31QUQmQY=,iv:TnFV0qEYbhsgS/Rm6JQngADyaHmajlQMSfkJQVX9pHo=,tag:qD6YQMXgTbFK7ypIF0JvTg==,type:str]
+        external-dns.alpha.kubernetes.io/hostname: persistent-audio-widget-spike.moment.tech
+    labels:
+        app.kubernetes.io/name: persistent-audio-widget-spike
+        app.kubernetes.io/version: 1.0.0
+spec:
+    ingressClassName: nginx
+    rules:
+        - host: persistent-audio-widget-spike.moment.tech
+          http:
+            paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                        name: persistent-audio-widget-spike
+                        port:
+                            number: 80
+    tls:
+        - hosts:
+            - persistent-audio-widget-spike.moment.tech
+          secretName: persistent-audio-widget-spike-tls
+sops:
+    age:
+        - recipient: age1zexdd6jgd7j4nh4dzn4umtu0ejpunghyhq9fxqvlt0u0sfeclpgq2d7m2l
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGUGNycGxsci9GenJHbWR4
+            SWo3M0hXOWk2cDFYQnIzemZMWGZDckNJNWpJClIzaS8xKzBESnpueWxmVnNnSTlL
+            RFN3V1cyeW5tMERFbHdWTmFjekVXMzAKLS0tIHpkVG5NSjZFY2RZS3JYWkJhaFZz
+            SEJNL2hBZUFzVkVUMTc5RVJ0clQ0emcKzHZcGmbP2uLAY5GD6+Itils9vj7ZOtRE
+            onrRguluEJqNR/osiE3O9i1W2qulGeUQiPYQGvq6GsCBwy6z1U2GoQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-09-09T16:16:26Z"
+    mac: ENC[AES256_GCM,data:Sby7ngpjsvltCdNaYPC0hwUidRQ6lOMDvf3XI61OdA9mw7DXJFK6K6+u7M81t5EHQZRGh6ilfgqFB3GqdPs3uOrM5yz3nWenqeuJnsKQU8imQ6lzKfocua9iLqIFzizarg/2a3owtIvTEQbyOWg+qKjQNmhiGiMwFNn+iK+uojk=,iv:lYg0DjOk8Dl+C8N11OujPuVYkX5XspsXJ+vDWTd0sfk=,tag:fq3IwE4Nw0kosma2Ovd7lg==,type:str]
+    encrypted_regex: ^(data|stringData|nginx\.ingress\.kubernetes\.io/whitelist-source-range)$
+    version: 3.11.0

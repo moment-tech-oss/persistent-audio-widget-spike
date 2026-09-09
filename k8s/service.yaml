@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: persistent-audio-widget-spike
+  namespace: moment-tech-oss
+  labels:
+    app.kubernetes.io/name: persistent-audio-widget-spike
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: persistent-audio-widget-spike
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http

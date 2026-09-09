@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: persistent-audio-widget-spike
+  namespace: moment-tech-oss
+  labels:
+    app.kubernetes.io/name: persistent-audio-widget-spike
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: persistent-audio-widget-spike
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: persistent-audio-widget-spike
+        app.kubernetes.io/version: "1.0.0"
+    spec:
+      containers:
+        - name: persistent-audio-widget-spike
+          image: registry-dev.moment.tech/moment/moment.service.persistent-audio-widget-spike:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 4173
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+      imagePullSecrets:
+        - name: registry-secret
