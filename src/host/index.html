@@ -26,6 +26,26 @@
         <button type="button" role="tab" aria-selected="false" data-route="page-2">Page 2</button>
       </nav>
 
+      <section class="host-controls" aria-labelledby="host-controls-title">
+        <div>
+          <p class="eyebrow">Host controls</p>
+          <h2 id="host-controls-title" data-host-track>Choose a title in Entertainment</h2>
+          <p class="host-control-status" data-host-control-status>Ready when you are</p>
+        </div>
+        <div class="host-control-actions">
+          <label class="host-timeline">
+            <span data-host-current>0:00</span>
+            <input type="range" min="0" max="0" value="0" step="0.1" data-host-seek aria-label="Seek audio from host page" disabled />
+            <span data-host-duration>0:00</span>
+          </label>
+          <div class="transport host-transport" aria-label="Host audio transport">
+            <button type="button" data-host-previous disabled>Previous</button>
+            <button type="button" data-host-toggle disabled>Play</button>
+            <button type="button" data-host-next disabled>Next</button>
+          </div>
+        </div>
+      </section>
+
       <section class="content" data-content-region aria-live="polite"></section>
       <p class="note">Changing routes removes the iframe. The floating player stays in the host page.</p>
     </main>

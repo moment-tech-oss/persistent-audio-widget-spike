@@ -462,21 +462,17 @@
     publish();
   }
 
-  function handleMessage(event) {
-    if (event.origin !== ORIGIN || event.source === window || !event.data) {
-      return;
-    }
-
-    switch (event.data.type) {
+  function handleCommand(data) {
+    switch (data.type) {
       case MESSAGE.LOAD: {
-        const track = validTrack(event.data.track);
+        const track = validTrack(data.track);
         if (track) {
           loadAndPlay(track);
         }
         break;
       }
       case MESSAGE.PLAYLIST:
-        setPlaylist(event.data.tracks);
+        setPlaylist(data.tracks);
         break;
       case MESSAGE.PREVIOUS:
         changeTrack(-1);
@@ -495,7 +491,7 @@
         sendState();
         break;
       case MESSAGE.SEEK: {
-        const time = Number(event.data.currentTime);
+        const time = Number(data.currentTime);
         if (state.track && Number.isFinite(time) && Number.isFinite(audio.duration)) {
           audio.currentTime = Math.max(0, Math.min(time, audio.duration));
           publish();
@@ -505,6 +501,14 @@
       default:
         break;
     }
+  }
+
+  function handleMessage(event) {
+    if (event.origin !== ORIGIN || event.source === window || !event.data) {
+      return;
+    }
+
+    handleCommand(event.data);
   }
 
   shadow.addEventListener('click', (event) => {
@@ -566,7 +570,11 @@
     audio.addEventListener(eventName, publish);
   });
 
+  function command(type, data = {}) {
+    handleCommand({ type, ...data });
+  }
+
   window.addEventListener('message', handleMessage);
   render();
-  window.__persistentAudioWidget = { audio, getState: snapshot };
+  window.__persistentAudioWidget = { audio, command, getState: snapshot };
 })();
