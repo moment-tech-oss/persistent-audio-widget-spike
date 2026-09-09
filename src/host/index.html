@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#202628" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Persistent audio widget spike</title>
+  </head>
+  <body class="host-page">
+    <main class="shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Host simulator</p>
+          <h1>One journey. Many screens.</h1>
+        </div>
+        <p class="host-status" aria-live="polite">
+          <span class="status-dot" data-host-status-dot></span>
+          <span data-host-status>Audio layer ready</span>
+        </p>
+      </header>
+
+      <nav class="navigation" aria-label="Host sections" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-route="entertainment">Entertainment (Iframe)</button>
+        <button type="button" role="tab" aria-selected="false" data-route="page-1">Page 1</button>
+        <button type="button" role="tab" aria-selected="false" data-route="page-2">Page 2</button>
+      </nav>
+
+      <section class="content" data-content-region aria-live="polite"></section>
+      <p class="note">Changing routes removes the iframe. The floating player stays in the host page.</p>
+    </main>
+
+    <script src="/audio-widget.js"></script>
+    <script src="/host.js"></script>
+  </body>
+</html>

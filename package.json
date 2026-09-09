@@ -1,0 +1,14 @@
+{
+  "name": "deffered-audio-player",
+  "version": "1.0.0",
+  "description": "Persistent audio playback across iframe navigation spike",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --check server.js && node --check src/widget/audio-widget.js && node --check src/host/host.js && node --check src/portal/portal.js"
+  }
+}

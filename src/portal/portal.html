@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Entertainment portal</title>
+  </head>
+  <body class="portal-page">
+    <main class="shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Entertainment portal</p>
+          <h1>Sound for the whole journey.</h1>
+        </div>
+        <span class="badge">Mounted iframe</span>
+      </header>
+
+      <section class="connection" aria-label="Widget connection status">
+        <div>
+          <h2>Host audio bridge</h2>
+          <p data-connection-status>Waiting for the persistent player...</p>
+        </div>
+        <span class="signal" aria-hidden="true"></span>
+      </section>
+
+      <section aria-labelledby="catalog-title">
+        <header class="section-header">
+          <h2 id="catalog-title">Featured audio</h2>
+          <p>Tap a title to load it in the host layer.</p>
+        </header>
+        <div class="catalog">
+          <button class="track-card" type="button" data-track-id="window-seat">
+            <span class="track-number">01 / NORTHBOUND</span>
+            <strong>Window Seat</strong>
+            <span>Lea Martin</span>
+            <b>Play</b>
+          </button>
+          <button class="track-card" type="button" data-track-id="blue-platform">
+            <span class="track-number">02 / NIGHT SERVICE</span>
+            <strong>Blue Platform</strong>
+            <span>Anton Vale</span>
+            <b>Play</b>
+          </button>
+          <button class="track-card" type="button" data-track-id="after-the-tunnel">
+            <span class="track-number">03 / LAST STOP</span>
+            <strong>After the Tunnel</strong>
+            <span>June Isles</span>
+            <b>Play</b>
+          </button>
+        </div>
+      </section>
+
+      <section class="sync" aria-labelledby="sync-title">
+        <header class="section-header">
+          <h2 id="sync-title">Two-way controls</h2>
+          <p>These controls talk to the host-owned audio element.</p>
+        </header>
+        <p class="sync-status" data-sync-status>Nothing is playing yet.</p>
+        <div class="timeline">
+          <span data-current-time>0:00</span>
+          <input type="range" min="0" max="0" value="0" step="0.1" data-portal-seek aria-label="Seek current audio" disabled />
+          <span data-duration>0:00</span>
+        </div>
+        <div class="transport">
+          <button type="button" data-previous disabled>Previous</button>
+          <button type="button" data-toggle disabled>Play from iframe</button>
+          <button type="button" data-next disabled>Next</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="/portal.js"></script>
+  </body>
+</html>
